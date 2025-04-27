@@ -817,16 +817,22 @@ WorldMap::update(float delta)
             MusicRef theme = music_manager->load_music(datadir + "/music/theme.mod");
 						MusicRef credits = music_manager->load_music(datadir + "/music/credits.ogg");
 #endif
-                        music_manager->play_music(theme);
+            music_manager->play_music(theme);
 #endif
-                        // Display final credits and go back to the main menu
-                        display_text_file(level->extro_filename,
-                                          "/images/background/extro.png", SCROLL_SPEED_MESSAGE);
+// Display final credits and go back to the main menu
+#ifdef TRIMUISMART
+            display_text_file(level->extro_filename, "/images/background/extro.png", SCROLL_SPEED_MESSAGE);
+#else
+            display_text_file(level->extro_filename, "/images/background/extro.jpg", SCROLL_SPEED_MESSAGE);
+#endif
 #ifndef NOSOUND
 			music_manager->play_music(credits,0);
 #endif
-			display_text_file("CREDITS",
-                                          "/images/background/oiltux.png", SCROLL_SPEED_CREDITS);
+#ifdef TRIMUISMART
+			display_text_file("CREDITS", "/images/background/oiltux.png", SCROLL_SPEED_CREDITS);
+#else
+      display_text_file("CREDITS", "/images/background/oiltux.jpg", SCROLL_SPEED_CREDITS);
+#endif
 #ifndef NOSOUND
                         music_manager->play_music(theme);
 #endif
