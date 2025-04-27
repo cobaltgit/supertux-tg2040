@@ -1,26 +1,11 @@
-
-# Type 'make GCW0=1' to build for GCW-Zero
-
-#GCW0 = 1
-
 APP_NAME = supertux
 
-# compiler
+CXX := arm-linux-g++
+SYSROOT = $(shell $(CXX) -print-sysroot)
 
-ifdef GCW0
-    CC = mipsel-linux-g++
-else
-    CC = g++
-endif 
-
-CXXDEFS = -DGP2X -DRES320X240 -DNOOPENGL -DHAVE_SOUND
-
-CXXFLAGS = $(CXXDEFS) -Wall -O2 -std=gnu++03 `sdl-config --cflags`
-CXXLIBS = -s -lz -lSDL -lSDL_mixer -lSDL_gfx -lSDL_image
-
-ifdef GCW0
-    CXXFLAGS += -mips32
-endif
+CXXDEFS = -DTRIMUISMART -DRES320X240 -DNOOPENGL -DHAVE_SOUND
+CXXFLAGS = $(CXXDEFS) -Wall -O3 -march=armv7-a -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -std=gnu++03 `$(SYSROOT)/usr/bin/sdl-config --cflags`
+CXXLIBS = -s -lz -lm -lSDL -lSDL_mixer -lSDL_image
 
 # source files
 
@@ -65,10 +50,10 @@ OBJ =	src/badguy.o \
 all : $(APP_NAME)
 
 $(APP_NAME) : $(OBJ)
-	$(CC) $^ $(CXXLIBS) -o $@
+	$(CXX) $^ $(CXXLIBS) -o $@
 
 %.o : %.cpp
-	$(CC) -c $(CXXFLAGS) $< -o $@
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 clean :
 	rm -rf src/*.o $(APP_NAME)

@@ -6,8 +6,8 @@ EXTRA_DIST = \
   images/icon.xpm \
   $(wildcard images/*.png) \
   $(wildcard images/*.xpm) \
-  $(wildcard images/background/*.png) \
   $(wildcard images/background/*.jpg) \
+  $(wildcard images/background/*.png) \
   $(wildcard images/icons/*.png) \
   $(wildcard images/icons/*.xpm) \
   $(wildcard images/shared/*.png) \
@@ -15,7 +15,7 @@ EXTRA_DIST = \
   $(wildcard images/worldmap/*.png) \
   $(wildcard images/worldmap/*.stwt) \
   $(wildcard images/title/*.png) \
-  $(wildcard images/title/*.jpg) \
+  $(wildcard images/title/*.png) \
   $(wildcard images/tilesets/*.png) \
   $(wildcard images/tilesets/*.stgt) \
   $(wildcard levels/bonus1/*.stl) \
@@ -26,6 +26,8 @@ EXTRA_DIST = \
   $(wildcard music/*.ogg) \
   $(wildcard music/*.mod) \
   $(wildcard music/*.MOD) \
+  $(wildcard music/*.mp3) \
+  $(wildcard music/*.xm) \
   $(wildcard sounds/*.wav)
 
 nobase_dist_pkgdata_DATA = $(EXTRA_DIST)

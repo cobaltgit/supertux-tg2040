@@ -395,7 +395,11 @@ WorldMap::WorldMap()
   enter_level = false;
 
   name = "<no file>";
+#ifdef TRIMUISMART
+  music = "salcon.mp3";
+#else
   music = "salcon.mod";
+#endif
 }
 
 WorldMap::~WorldMap()
@@ -806,23 +810,23 @@ WorldMap::update(float delta)
                     if (!level->extro_filename.empty())
                       { 
 #ifndef NOSOUND
-                        MusicRef theme =
-                          music_manager->load_music(datadir + "/music/theme.mod");
-#ifdef GP2X
-                        MusicRef credits = music_manager->load_music(datadir + "/music/credits.xm");
+#ifdef TRIMUISMART
+            MusicRef theme = music_manager->load_music(datadir + "/music/theme.mp3");
+            MusicRef credits = music_manager->load_music(datadir + "/music/credits.mp3");
 #else
+            MusicRef theme = music_manager->load_music(datadir + "/music/theme.mod");
 						MusicRef credits = music_manager->load_music(datadir + "/music/credits.ogg");
 #endif
                         music_manager->play_music(theme);
 #endif
                         // Display final credits and go back to the main menu
                         display_text_file(level->extro_filename,
-                                          "/images/background/extro.jpg", SCROLL_SPEED_MESSAGE);
+                                          "/images/background/extro.png", SCROLL_SPEED_MESSAGE);
 #ifndef NOSOUND
 			music_manager->play_music(credits,0);
 #endif
 			display_text_file("CREDITS",
-                                          "/images/background/oiltux.jpg", SCROLL_SPEED_CREDITS);
+                                          "/images/background/oiltux.png", SCROLL_SPEED_CREDITS);
 #ifndef NOSOUND
                         music_manager->play_music(theme);
 #endif

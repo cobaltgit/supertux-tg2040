@@ -28,6 +28,10 @@
 #include "menu.h"
 #include "mousecursor.h"
 
+#ifdef TRIMUISMART
+#define GP2X // GP2X controls work unmodified
+#endif
+
 #ifdef GP2X
 #define GP2X_BUTTON_UP              (0)
 #define GP2X_BUTTON_DOWN            (4)

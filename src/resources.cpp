@@ -201,8 +201,13 @@ void loadshared()
 #endif
 
   /* Herring song */
+#ifdef TRIMUISMART
+  herring_song = music_manager->load_music(datadir + "/music/salcon.mp3");
+  level_end_song = music_manager->load_music(datadir + "/music/leveldone.mp3");
+#else
   herring_song = music_manager->load_music(datadir + "/music/salcon.mod");
   level_end_song = music_manager->load_music(datadir + "/music/leveldone.mod");
+#endif
 #endif
 }
 
